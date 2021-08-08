@@ -19,5 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('posts', ApipostController::class);
-
+Route::get('posts', [ApipostController::class,'index']);
+Route::get('/posts/featured', [ApipostController::class,'featured']);
+Route::get('/posts/search',[ApipostController::class,'search']);
+Route::get('/posts/categories',[ApipostController::class,'categories']);
+Route::get('/posts/listcategories',[ApipostController::class,'listcategories']);
+Route::put('/posts/views/{id}',[ApipostController::class,'views']);

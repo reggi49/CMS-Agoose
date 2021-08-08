@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\PostSeo;
+use App\Models\PostsCategories;
 use Illuminate\Http\Request;
 
 class ApipostController extends Controller
@@ -13,7 +15,7 @@ class ApipostController extends Controller
      */
     public function index()
     {
-        return Post::all();
+        return Post::paginate(10);
     }
 
     /**
@@ -21,9 +23,66 @@ class ApipostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function featured(Request $request)
+	{
+		// limit untuk nanti
+		$limit = $request->limit;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$posts = Post::where('featured', 1)
+		->paginate($limit);
+ 
+    		// mengirim data pegawai ke view index
+		return $posts;
+ 
+	}
+
+    public function search(Request $request)
+	{
+		// menangkap data pencarian
+		$keyword = $request->keyword;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$posts = Post::where('title','like',"%".$keyword."%")
+		->paginate();
+ 
+    		// mengirim data pegawai ke view index
+		return $posts;
+ 
+	}
+
+    public function Categories(Request $request)
+	{
+		// menangkap data pencarian
+		$keyword = $request->keyword;
+        $keyword = explode(",", $keyword);
+        
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$posts = Post::where(function($query) use ($keyword){
+            foreach ($keyword as $keyword) {
+                $query->orWhere('categories', 'LIKE', '%'.$keyword.'%');
+            }
+        })
+		->paginate(5);
+ 
+    		// mengirim data pegawai ke view index
+		return $posts;
+ 
+	}
+
+    public function Listcategories(Request $request)
+	{
+        return PostsCategories::all();
+ 
+	}
+
+    public function create(Request $request)
     {
-        //
+        $postloved = new Postloved;
+        $id_posts = $request->id_posts;
+        $id_users = $request->id_users;
+        $postloved->save();
     }
 
     /**
@@ -66,9 +125,22 @@ class ApipostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function views(Request $request, $videoId)
     {
-        //
+        Post::where('videoId',$videoId)
+        ->increment('views');
+        
+        return "views berhasil ditambah";
+    }
+    public function update(Request $request, $videoId)
+    {
+        // $views = $request->views;
+        // $post = Post::find($videoId);
+        // Post::where('videoId',$videoId)
+        // ->increment('views');
+
+
+        // return "data berhasil di simpan";
     }
 
     /**

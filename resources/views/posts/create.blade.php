@@ -23,7 +23,7 @@
     </div>
 @endif
  
-<form action="{{ route('posts.store') }}" method="POST">
+<form action="{{ route('posts.store') }}" enctype="multipart/form-data" method="POST">
     @csrf
  
      <div class="row">
@@ -53,8 +53,27 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <label><strong>Select Category :</strong></label><br/>
+                <select class="form-control" name="categories[]" multiple="">
+                    <option value="php">PHP</option>
+                    <option value="react">React</option>
+                    <option value="jquery">JQuery</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="angular">Angular</option>
+                    <option value="vue">Vue</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Published:</strong>
                 <input type="text" name="published" class="form-control" placeholder="Published">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Thumbnail:</strong>
+                <input type="text" name="thumbnail" class="form-control" placeholder="thumbnail">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
