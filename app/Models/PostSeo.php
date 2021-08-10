@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostsCategories extends Model
+class PostSeo extends Model
 {
     use HasFactory;
      protected $fillable = [
-        'name','is_active'
+        'id_posts','id_users','views','comment','likes'
     ];
 }

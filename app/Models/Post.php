@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
 class Post extends Model
 {
@@ -23,5 +24,10 @@ class Post extends Model
     public function getCategoriesAttribute($value)
     {
         return $this->attributes['categories'] = json_decode($value);
+    }
+
+    public function scopeWhereDateBetween($query,$fieldName,$fromDate,$todate)
+    {
+        return $query->whereDate($fieldName,'>=',$fromDate)->whereDate($fieldName,'<=',$todate);
     }
 }

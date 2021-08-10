@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\PostSeo;
-use App\Models\PostsCategories;
+use App\Models\PostCategories;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class ApipostController extends Controller
 {
@@ -15,7 +17,7 @@ class ApipostController extends Controller
      */
     public function index()
     {
-        return Post::paginate(10);
+        return Post::paginate(7);
     }
 
     /**
@@ -31,7 +33,7 @@ class ApipostController extends Controller
  
     		// mengambil data dari table pegawai sesuai pencarian data
 		$posts = Post::where('featured', 1)
-		->paginate($limit);
+		->paginate(10);
  
     		// mengirim data pegawai ke view index
 		return $posts;
@@ -64,7 +66,7 @@ class ApipostController extends Controller
                 $query->orWhere('categories', 'LIKE', '%'.$keyword.'%');
             }
         })
-		->paginate(5);
+		->paginate(7);
  
     		// mengirim data pegawai ke view index
 		return $posts;
@@ -73,13 +75,65 @@ class ApipostController extends Controller
 
     public function Listcategories(Request $request)
 	{
-        return PostsCategories::all();
+        return PostCategories::all();
  
 	}
+    
+    public function loved(Request $request)
+    {
+        $id_posts = $request->id_posts;
+        $id_users = $request->id_users;
+        $likes = $request->likes;
+        $existseo = PostSeo::where('id_posts', '=', $id_posts)
+         ->where('id_users', '=', $id_users)
+         ->first();
+
+        
+        if ($existseo !== null ) {
+            if($likes === '1'  || $likes === '2'){
+                PostSeo::where('id_posts', $id_posts)
+                 ->update(['likes' => $likes]);
+
+                return "liked";
+            }else{  
+                PostSeo::where('id_posts',$id_posts)
+                ->increment('views'); 
+                return "views ditambah";
+            }
+        }else {
+            $postseo = new PostSeo;
+            $postseo->id_posts = $request->id_posts;
+            $postseo->id_users = $request->id_users;
+            $postseo->views = $request->views;
+            $postseo->comment = $request->comment;
+            $postseo->likes = $request->likes;
+            $postseo->save();
+            
+            return "data berhasil masuk";
+        }
+    }
+
+    public function lastview(Request $request)
+    {
+        $postseo = new PostSeo;
+        $id_posts = $request->id_posts;
+        $id_users = $request->id_users;
+        $postloved->save();
+
+        return "data berhasil masuk";
+    }
+
+    public function mostpopular(Request $request)
+    {
+        $posts = Post::whereDateBetween('updated_at',(new Carbon)->subDays(10)->startOfDay()->toDateString(),(new Carbon)->now()->endOfDay()->toDateString() )
+        ->orderBy('views','desc')
+        ->paginate(7);
+        return $posts;
+    }
 
     public function create(Request $request)
     {
-        $postloved = new Postloved;
+        $postseo = new PostSeo;
         $id_posts = $request->id_posts;
         $id_users = $request->id_users;
         $postloved->save();
