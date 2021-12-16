@@ -207,6 +207,24 @@ class PostController extends Controller
                         ->with('success','Post created successfully.');
     }
 
+    public function imgupload(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+            $request->file('upload')->move(public_path('images'), $fileName);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('images/'.$fileName); 
+            $msg = 'Image successfully uploaded'; 
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+               
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $response;
+        }
+    }
+
     public function show(Post $post)
     {
         /// dengan menggunakan resource, kita bisa memanfaatkan model sebagai parameter
@@ -228,15 +246,15 @@ class PostController extends Controller
         /// membuat validasi untuk title dan content wajib diisi
         $request->validate([
             'title' => 'required',
-            'content' => 'required',
+            'description' => 'required',
         ]);
-         
+        // dd($request);die;
         /// mengubah data berdasarkan request dan parameter yang dikirimkan
         $post->update($request->all());
          
         /// setelah berhasil mengubah data
         return redirect()->route('posts.index')
-                        ->with('success','Post updated successfully');
+            ->with('success','Post updated successfully');
     }
   
     public function destroy(Post $post)
@@ -245,6 +263,6 @@ class PostController extends Controller
         $post->delete();
   
         return redirect()->route('posts.index')
-                        ->with('success','Post deleted successfully');
+            ->with('success','Post deleted successfully');
     }
 }
