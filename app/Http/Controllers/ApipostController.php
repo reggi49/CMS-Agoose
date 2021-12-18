@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\PostSeo;
 use App\Models\PostCategories;
+use App\Models\PostChannels;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
@@ -76,6 +77,12 @@ class ApipostController extends Controller
     public function Listcategories(Request $request)
 	{
         return PostCategories::all();
+ 
+	}
+
+    public function Listchannels(Request $request)
+	{
+        return PostChannels::all();
  
 	}
     

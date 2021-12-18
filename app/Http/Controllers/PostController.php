@@ -29,75 +29,75 @@ class PostController extends Controller
         // print_r($search); // First page results
         // print("</pre>");
 
-// // Check if we have a pageToken
-// if (isset($search['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search['info']['nextPageToken'];
-// }
-// // Make another call and repeat
-// $search2 = Youtube::searchAdvanced($params, true);
+        // // Check if we have a pageToken
+        // if (isset($search['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search['info']['nextPageToken'];
+        // }
+        // // Make another call and repeat
+        // $search2 = Youtube::searchAdvanced($params, true);
 
-// echo"page2";
-// print("<pre>");
-// print_r($search2); // Second page results
-// print("</pre>");
+        // echo"page2";
+        // print("<pre>");
+        // print_r($search2); // Second page results
+        // print("</pre>");
 
-// // Check if we have a pageToken
-// if (isset($search2['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search2['info']['nextPageToken'];
-// }
-// $search3 = Youtube::searchAdvanced($params, true);
-// echo"page3";
-// print("<pre>");
-// print_r($search3); // Second page results
-// print("</pre>");
+        // // Check if we have a pageToken
+        // if (isset($search2['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search2['info']['nextPageToken'];
+        // }
+        // $search3 = Youtube::searchAdvanced($params, true);
+        // echo"page3";
+        // print("<pre>");
+        // print_r($search3); // Second page results
+        // print("</pre>");
 
-// // Check if we have a pageToken
-// if (isset($search3['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search3['info']['nextPageToken'];
-// }
-// $search4 = Youtube::searchAdvanced($params, true);
+        // // Check if we have a pageToken
+        // if (isset($search3['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search3['info']['nextPageToken'];
+        // }
+        // $search4 = Youtube::searchAdvanced($params, true);
 
-// // print("<pre>");
-// // print_r($search4); // Second page results
-// // print("</pre>");
+        // // print("<pre>");
+        // // print_r($search4); // Second page results
+        // // print("</pre>");
 
-// // Check if we have a pageToken
-// if (isset($search4['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search4['info']['nextPageToken'];
-// }
-// $search5 = Youtube::searchAdvanced($params, true);
+        // // Check if we have a pageToken
+        // if (isset($search4['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search4['info']['nextPageToken'];
+        // }
+        // $search5 = Youtube::searchAdvanced($params, true);
 
-// // print("<pre>");
-// // print_r($search5); // Second page results
-// // print("</pre>");
+        // // print("<pre>");
+        // // print_r($search5); // Second page results
+        // // print("</pre>");
 
-// // Check if we have a pageToken
-// if (isset($search5['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search5['info']['nextPageToken'];
-// }
-// $search6 = Youtube::searchAdvanced($params, true);
+        // // Check if we have a pageToken
+        // if (isset($search5['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search5['info']['nextPageToken'];
+        // }
+        // $search6 = Youtube::searchAdvanced($params, true);
 
-// // print("<pre>");
-// // print_r($search6); // Second page results
-// // print("</pre>");
+        // // print("<pre>");
+        // // print_r($search6); // Second page results
+        // // print("</pre>");
 
-// // Check if we have a pageToken
-// if (isset($search6['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search6['info']['nextPageToken'];
-// }
-// $search7 = Youtube::searchAdvanced($params, true);
+        // // Check if we have a pageToken
+        // if (isset($search6['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search6['info']['nextPageToken'];
+        // }
+        // $search7 = Youtube::searchAdvanced($params, true);
 
-// // print("<pre>");
-// // print_r($search7); // Second page results
-// // print("</pre>");
+        // // print("<pre>");
+        // // print_r($search7); // Second page results
+        // // print("</pre>");
 
-// if (isset($search7['info']['nextPageToken'])) {
-//     $params['pageToken'] = $search7['info']['nextPageToken'];
-// }
-// $search8 = Youtube::searchAdvanced($params, true);
-// print("<pre>");
-// print_r($search8); // Second page results
-// print("</pre>");
+        // if (isset($search7['info']['nextPageToken'])) {
+        //     $params['pageToken'] = $search7['info']['nextPageToken'];
+        // }
+        // $search8 = Youtube::searchAdvanced($params, true);
+        // print("<pre>");
+        // print_r($search8); // Second page results
+        // print("</pre>");
 
         // $jsonarray =json_decode(json_encode($search),TRUE); // $b=your json array
         //     foreach ($jsonarray as $key => $results) 
