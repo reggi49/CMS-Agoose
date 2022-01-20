@@ -33,7 +33,8 @@ class ApipostController extends Controller
 		$limit = $request->limit;
  
     		// mengambil data dari table pegawai sesuai pencarian data
-		$posts = Post::where('featured', 1)
+		$posts = Post::orderBy('updated_at', 'DESC')
+        ->where('featured', 1)
 		->paginate(10);
  
     		// mengirim data pegawai ke view index
@@ -43,25 +44,21 @@ class ApipostController extends Controller
 
     public function search(Request $request)
 	{
-		// menangkap data pencarian
 		$keyword = $request->keyword;
  
-    		// mengambil data dari table pegawai sesuai pencarian data
-		$posts = Post::where('title','like',"%".$keyword."%")
+		$posts = Post::orderBy('updated_at', 'DESC')
+        ->where('title','like',"%".$keyword."%")
 		->paginate();
  
-    		// mengirim data pegawai ke view index
 		return $posts;
  
 	}
 
     public function Categories(Request $request)
 	{
-		// menangkap data pencarian
 		$keyword = $request->keyword;
         $keyword = explode(",", $keyword);
         
-    		// mengambil data dari table pegawai sesuai pencarian data
 		$posts = Post::where(function($query) use ($keyword){
             foreach ($keyword as $keyword) {
                 $query->orWhere('categories', 'LIKE', '%'.$keyword.'%');
@@ -69,20 +66,19 @@ class ApipostController extends Controller
         })
 		->paginate(7);
  
-    		// mengirim data pegawai ke view index
 		return $posts;
  
 	}
 
     public function Listcategories(Request $request)
 	{
-        return PostCategories::all();
+        return PostCategories::orderBy('updated_at','desc')->get();
  
 	}
 
     public function Listchannels(Request $request)
 	{
-        return PostChannels::all();
+        return PostChannels::orderBy('updated_at','desc')->get();
  
 	}
     
@@ -192,6 +188,10 @@ class ApipostController extends Controller
         ->increment('views');
         
         return "views berhasil ditambah";
+    }
+    public function scopeUpdateDescending($query)
+    {
+        return $query->orderBy('updated_at','DESC');
     }
     public function update(Request $request, $videoId)
     {
