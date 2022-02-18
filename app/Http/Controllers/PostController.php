@@ -180,8 +180,11 @@ class PostController extends Controller
   
     public function create()
     {
-        /// menampilkan halaman create
-        return view('posts.create');
+        // get Channelid With Channel Title
+        $post['channels'] = DB::table('post_channels')->get();
+        $post['categories'] = DB::table('post_categories')->get();
+        //dd($post);
+        return view('posts.create',compact('post'));
     }
   
     public function store(Request $request)
@@ -189,13 +192,14 @@ class PostController extends Controller
         /// membuat validasi untuk title dan content wajib diisi
         $request->validate([
             'videoId' => 'required',
-            'channelId' => 'required',
+            // 'channelId' => 'required',
             'channelTitle' => 'required',
             'title' => 'required',
             'categories' => 'required',
             'published' => 'required',
             'description' => 'required',
             'thumbnail' => 'required',
+            'background' => 'required',
         ]);
          
         /// insert setiap request dari form ke dalam database via model

@@ -9,6 +9,6 @@ class PostSeo extends Model
 {
     use HasFactory;
      protected $fillable = [
-        'id_posts','id_users','views','comment','likes'
+        'id_posts','id_users','view','comment','like'
     ];
 }

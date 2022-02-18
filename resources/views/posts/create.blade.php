@@ -35,14 +35,18 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Channel Id:</strong>
-                <input type="text" name="channelId" class="form-control" placeholder="Channel Id">
+                <label><strong>Channel Title :</strong></label><br/>
+                <select class="form-control" id="channelTitle" name="channelTitle" onchange="idChannels()">
+                    @foreach($post['channels'] as $channels)
+                        <option value="{{ $channels->channel_id }}">{{ $channels->channel_title }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Channel Title:</strong>
-                <input type="text" name="channelTitle" class="form-control" placeholder="Channel Title">
+                <strong>Channel Id:</strong>
+                <input type="text" name="channelId" id="channelId" class="form-control" placeholder="Channel Id">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -55,19 +59,19 @@
             <div class="form-group">
                 <label><strong>Select Category :</strong></label><br/>
                 <select class="form-control" name="categories[]" multiple="">
-                    <option value="php">PHP</option>
-                    <option value="react">React</option>
-                    <option value="jquery">JQuery</option>
-                    <option value="javascript">Javascript</option>
-                    <option value="angular">Angular</option>
-                    <option value="vue">Vue</option>
+                    @foreach($post['categories'] as $categories)
+                        <option value="{{ $categories->name }}">{{ $categories->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Published:</strong>
-                <input type="text" name="published" class="form-control" placeholder="Published">
+                    <select name="published" id="published">
+                    <option value="1">Ya</option>
+                    <option value="0">Tidak</option>
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -78,8 +82,14 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Deskripsi:</strong>
-                <textarea class="form-control" style="height:150px" name="description" placeholder="description"></textarea>
+                <strong>Background:</strong>
+                <input type="text" name="background" class="form-control" placeholder="background">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Deskripsi:</strong>                    
+                <textarea class="ckeditor form-control" name="description" placeholder="Description"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -88,4 +98,23 @@
     </div>
  
 </form>
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+    </script>
+    <script type="text/javascript">
+        CKEDITOR.replace('content', {
+            filebrowserUploadMethod: 'form'
+    });
+        CKEDITOR.replace( 'content', {
+    removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor'
+        });
+</script>
+<script>
+function idChannels(){
+    var id=document.getElementById("channelTitle").value
+    document.getElementById("channelId").value = id;
+} </script>
 @endsection

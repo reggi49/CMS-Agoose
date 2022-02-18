@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
      protected $fillable = [
-        'videoId','channelId','channelTitle', 'title','description','categories','published','featured','thumbnail','views'
+        'videoId','channelId','channelTitle', 'title','description','categories','published','featured','thumbnail','background','views'
     ];
     
     public function setCategoriesAttribute($value)

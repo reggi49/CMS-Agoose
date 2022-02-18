@@ -82,6 +82,12 @@
                     <input type="text" name="thumbnail" value="{{ $post->thumbnail }}" class="form-control" placeholder="Title">
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Background:</strong>
+                    <input type="text" name="background" value="{{ $post->background }}" class="form-control" placeholder="Title">
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
