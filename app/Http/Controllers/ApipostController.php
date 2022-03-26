@@ -18,7 +18,7 @@ class ApipostController extends Controller
      */
     public function index()
     {
-        return Post::paginate(7);
+        return Post::all();
     }
 
     /**
