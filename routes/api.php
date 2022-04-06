@@ -27,4 +27,6 @@ Route::get('/posts/listcategories',[ApipostController::class,'listcategories']);
 Route::get('/posts/listchannels',[ApipostController::class,'listchannels']);
 Route::get('/posts/mostpopular',[ApipostController::class,'mostpopular']);
 Route::put('/posts/views/{id}',[ApipostController::class,'views']);
+Route::get('/posts/getloved',[ApipostController::class,'getloved']);
 Route::post('/posts/loved',[ApipostController::class,'loved']);
+Route::delete('/posts/delloved',[ApipostController::class,'delloved']);

@@ -32,7 +32,6 @@ class ApipostController extends Controller
 		// limit untuk nanti
 		$limit = $request->limit;
  
-    		// mengambil data dari table pegawai sesuai pencarian data
 		$posts = Post::orderBy('updated_at', 'DESC')
         ->where('featured', 1)
 		->paginate(10);
@@ -59,7 +58,8 @@ class ApipostController extends Controller
 		$keyword = $request->keyword;
         $keyword = explode(",", $keyword);
         
-		$posts = Post::where(function($query) use ($keyword){
+		$posts = Post::orderBy('updated_at', 'DESC')
+        ->where(function($query) use ($keyword){
             foreach ($keyword as $keyword) {
                 $query->orWhere('categories', 'LIKE', '%'.$keyword.'%');
             }
@@ -114,6 +114,31 @@ class ApipostController extends Controller
             
             return "data berhasil masuk";
         }
+    }
+
+    public function getloved(Request $request)
+    {
+        $id_posts = $request->posts;
+        $id_users = $request->users;
+        $getloved = Post::select('posts.*', 'post_seos.*')
+        ->join('post_seos', 'posts.videoId', '=', 'post_seos.id_posts')
+        ->where('post_seos.id_users','=', $id_users)
+        ->where('post_seos.likes', '=', 2)
+        ->orderBy('post_seos.id','desc')
+        ->paginate(7);
+
+        return $getloved;
+    }
+
+    public function delloved(Request $request)
+    {
+        $id_posts = $request->posts;
+        $id_users = $request->users;
+        $delloved = PostSeo::where('post_seos.id_users','=', $id_users)
+        ->where('post_seos.id_posts', '=', $id_posts)
+        ->delete();
+
+        return $delloved;
     }
 
     public function lastview(Request $request)
