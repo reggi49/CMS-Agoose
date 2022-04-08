@@ -18,7 +18,7 @@ class ApipostController extends Controller
      */
     public function index()
     {
-        return Post::orderBy('id','desc')->paginate(7);
+        return Post::orderBy('id','desc')->paginate(12);
     }
 
     /**
@@ -34,7 +34,7 @@ class ApipostController extends Controller
  
 		$posts = Post::orderBy('updated_at', 'DESC')
         ->where('featured', 1)
-		->paginate(10);
+		->paginate(18);
  
     		// mengirim data pegawai ke view index
 		return $posts;
@@ -64,7 +64,7 @@ class ApipostController extends Controller
                 $query->orWhere('categories', 'LIKE', '%'.$keyword.'%');
             }
         })
-		->paginate(7);
+		->paginate(12);
  
 		return $posts;
  
@@ -125,7 +125,7 @@ class ApipostController extends Controller
         ->where('post_seos.id_users','=', $id_users)
         ->where('post_seos.likes', '=', 2)
         ->orderBy('post_seos.id','desc')
-        ->paginate(7);
+        ->paginate(12);
 
         return $getloved;
     }
@@ -155,7 +155,7 @@ class ApipostController extends Controller
     {
         $posts = Post::whereDateBetween('updated_at',(new Carbon)->subDays(10)->startOfDay()->toDateString(),(new Carbon)->now()->endOfDay()->toDateString() )
         ->orderBy('views','desc')
-        ->paginate(7);
+        ->paginate(12);
         return $posts;
     }
 
