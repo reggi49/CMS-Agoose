@@ -37,8 +37,9 @@
             <div class="form-group">
                 <label><strong>Channel Title :</strong></label><br/>
                 <select class="form-control" id="channelTitle" name="channelTitle" onchange="idChannels()">
+                   <option value="No Channel" data-id="1">Pilih Title</option>
                     @foreach($post['channels'] as $channels)
-                        <option value="{{ $channels->channel_id }}">{{ $channels->channel_title }}</option>
+                        <option value="{{ $channels->channel_title }}" data-id="{{ $channels->channel_id }}">{{ $channels->channel_title }}</option>
                     @endforeach
                 </select>
             </div>
@@ -67,6 +68,15 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Featured:</strong>
+                    <select name="featured" id="featured">
+                    <option value="1">Ya</option>
+                    <option value="0">Tidak</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Published:</strong>
                     <select name="published" id="published">
                     <option value="1">Ya</option>
@@ -76,13 +86,13 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Thumbnail:</strong>
+                <strong>Thumbnail (200x300) :</strong>
                 <input type="text" name="thumbnail" class="form-control" placeholder="thumbnail">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Background:</strong>
+                <strong>Background (maxres):</strong>
                 <input type="text" name="background" class="form-control" placeholder="background">
             </div>
         </div>
@@ -114,7 +124,9 @@
 </script>
 <script>
 function idChannels(){
-    var id=document.getElementById("channelTitle").value
+    var elem=document.getElementById("channelTitle");
+    var id = elem.options[elem.selectedIndex].getAttribute('data-id');
+
     document.getElementById("channelId").value = id;
 } </script>
 @endsection

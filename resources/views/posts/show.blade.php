@@ -21,8 +21,46 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Channel Title:</strong>
+                {{ $post->channelTitle }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Featured:</strong>
+                {{ $post->featured }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Embed Video:</strong>
+                 <iframe width="420" height="315"
+                    src="https://www.youtube.com/embed/{{$post->videoId}}">
+                </iframe> 
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Published:</strong>
+                {{ $post->published }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Thumbnail:</strong>
+                <img src="{{ $post->thumbnail }}"/>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Background:</strong>
+                <img src="{{ $post->background }}"/>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Content:</strong>
-                {{ $post->content }}
+                {{ $post->description }}
             </div>
         </div>
     </div>
