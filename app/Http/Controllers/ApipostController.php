@@ -130,6 +130,14 @@ class ApipostController extends Controller
         return $getloved;
     }
 
+    public function getdongeng(Request $request)
+    {
+        $slug = $request->slug;
+        $getdongeng = Post::where('slug', $slug)->get();
+
+        return $getdongeng;
+    }
+
     public function delloved(Request $request)
     {
         $id_posts = $request->posts;
@@ -141,6 +149,15 @@ class ApipostController extends Controller
         return $delloved;
     }
 
+
+    public function deluserhistory(Request $request){
+        $id_users = $request->users;
+        $delloved = PostSeo::where('post_seos.id_users','=', $id_users)
+        ->delete();
+
+        return $delloved;
+    }
+    
     public function lastview(Request $request)
     {
         $postseo = new PostSeo;
